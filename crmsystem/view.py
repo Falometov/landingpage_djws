@@ -3,6 +3,7 @@ from .models import Request
 from .forms import RequestForm
 from cmssystem.models import CmsSlider
 from price.models import PriceCard
+from telegrambot.sendmessage import sendTelegram
 
 # Create your views here.
 def first_page(request):
@@ -23,12 +24,19 @@ def first_page(request):
 
 
 def thanks_page(request):
-    name = request.POST['name']
-    email = request.POST['email']
-    plan = request.POST['plan']
-    new_element = Request(request_name = name, request_email = email, request_plan = plan)
-    new_element.save()
-    return render(request, './thanks.html', {'name': name,
-                                             'email': email,
-                                             'plan': plan})
+    try:
+        name = request.POST['name']
+        email = request.POST['email']
+        plan = request.POST['plan']
+        new_element = Request(request_name=name, request_email=email, request_plan=plan)
+        new_element.save()
+        sendTelegram(tg_name = name, tg_plan = plan)
+    except Exception:
+        name = ''
+        email = ''
+        plan = ''
+    finally:
+        return render(request, './thanks.html', {'name': name,
+                                                 'email': email,
+                                                 'plan': plan})
 
