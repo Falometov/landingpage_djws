@@ -3,12 +3,12 @@ from django.db import models
 # Create your models here.
 class Order(models.Model):
     order_dt = models.DateTimeField(auto_now=True)
-    order_name = models.CharField(max_length=200, verbose_name='Имя')
-    order_email = models.CharField(max_length=200, verbose_name='email')
+    order_name = models.CharField(max_length=200, verbose_name='Name')
+    order_email = models.CharField(max_length=200, verbose_name='Email')
 
     def __str__(self):
         return self.order_email
 
     class Meta:
-        verbose_name = 'Заказ'
-        verbose_name_plural = 'Заказы'
+        verbose_name = 'Order'
+        verbose_name_plural = 'Orders'
