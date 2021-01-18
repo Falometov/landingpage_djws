@@ -10,22 +10,34 @@
   		<div class="container class_form">
   			<h1 class="text-3">Leave request to get your plan</h1>
   			<div class="row justify-content-center">
-  			<form action="" method="" style="width: 50%;">
-			  <div class="form-group row">
-			    <label for="inputEmail3" class="col-sm-2 col-form-label">Имя</label><br>
-			      <input type="text" class="form-control" name="name">
-			    <div class="">
-			    </div>
-			  </div>
-			  <div class="form-group row">
-			    <label for="inputEmail3" class="col-sm-2 col-form-label">Телефон</label><br>
-			      <input type="text" class="form-control" name="phone">
-			    <div class="">
-			    </div>
-			  </div>
-			  <div style="float: right;" class="form-group row">
-			      <button type="submit" class="btn btn-success">SEND REQUEST</button>
-			  </div>
+  			<form action="{% url 'thanks.html' %}" method="POST" style="width: 50%;">
+				{% csrf_token %}
+			  	<div class="form-group row">
+			    	<label for="inputEmail3" class="col-sm-2 col-form-label">Name</label><br>
+					{{ form.name }}
+			    	<div class="">
+			    	</div>
+			  	</div>
+			  	<div class="form-group row">
+			    	<label for="inputEmail3" class="col-sm-2 col-form-label">Email</label><br>
+			      	{{ form.email }}
+			    	<div class="">
+			    	</div>
+			  	</div>
+				<div class="form-group row select">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Plan</label><br>
+			      	<select name="plan" required="true" class="form-control">
+						<option></option>
+						{% for plan in plans_list %}
+						<option>{{ plan.pc_name }}</option>
+						{% endfor %}
+				   </select>
+			    	<div class="">
+			    	</div>
+			  	</div>
+			  	<div style="float: right;" class="form-group row">
+			      	<button type="submit" class="btn btn-success">SEND REQUEST</button>
+			  	</div>
 			</form>
 			</div>
   		</div>
