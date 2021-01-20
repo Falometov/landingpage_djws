@@ -3,7 +3,11 @@
 {% block thanks %}
   	<section>
   		<div class="container">
+			{% if name %}
   			<CENTER style = 'margin-top: 35%; margin-bottom: 35%;'><h1>{{ name }}, thank you for your request!</h1></CENTER>
+			{% else %}
+			<CENTER style = 'margin-top: 35%; margin-bottom: 35%;'><h1>Request not found</h1></CENTER>
+			{% endif %}
   		</div>
   	</section>
 {% endblock %}

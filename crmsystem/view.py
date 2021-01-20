@@ -24,19 +24,16 @@ def first_page(request):
 
 
 def thanks_page(request):
-    try:
+    if request.POST:
         name = request.POST['name']
         email = request.POST['email']
         plan = request.POST['plan']
         new_element = Request(request_name=name, request_email=email, request_plan=plan)
         new_element.save()
         sendTelegram(tg_name = name, tg_plan = plan)
-    except Exception:
-        name = ''
-        email = ''
-        plan = ''
-    finally:
         return render(request, './thanks.html', {'name': name,
                                                  'email': email,
                                                  'plan': plan})
+    else:
+        return render(request, './thanks.html')
 
